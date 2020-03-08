@@ -1,6 +1,6 @@
-# Java Application Template
+# Gosu Library Template
 
-A basic gradle project for java application development.
+A basic gradle project for gosu library development.
 
 ## Usage
 
