@@ -26,6 +26,8 @@ gradlew clean check
 ```
 
 > The preceding command must be run from the location where you've cloned the repository.
+>
+> If you running the test in IntelliJ's **Platform Test Runner** ensure that the **Java 8's tools.jar** is part of the **1.8 SDK's** classpath.
 
 ## Building
 
