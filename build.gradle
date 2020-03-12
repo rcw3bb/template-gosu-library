@@ -1,3 +1,5 @@
+import java.nio.file.Paths
+
 plugins {
     id 'org.gosu-lang.gosu' version '0.3.10'
 }
@@ -22,7 +24,7 @@ dependencies {
     testCompile group: 'org.gosu-lang.gosu', name: 'gosu-test', version: '1.14.14'
 }
 
-task preparePackage(dependsOn: [build]) {
+task preparePackage(dependsOn: [jar]) {
     doLast {
         def srcDir = sourceSets.main.gosu.sourceDirectories.asPath
         def destDir = Paths.get(buildDir.absolutePath, "gosu")
@@ -34,17 +36,31 @@ task preparePackage(dependsOn: [build]) {
     }
 }
 
-task jarGosu(dependsOn: [jar]) {
+task jarGosu(dependsOn: [preparePackage]) {
     doLast {
         def srcDir = Paths.get(buildDir.absolutePath, "gosu")
-        def jarFile = "${project.name}-${version}-gosu.jar"
-        def outputFile = Paths.get(buildDir.absolutePath, "gosu-libs", jarFile)
+        def jarFilename ="${project.name}-${version}"
+        def jarGosuFile = "${jarFilename}-gosu.jar"
+        def javaLibsDir = Paths.get(buildDir.absolutePath, "java-libs")
+        def gosuLibsDir = Paths.get(buildDir.absolutePath, "gosu-libs")
+        def outputGosuFile = Paths.get(gosuLibsDir.toFile().absolutePath, jarGosuFile)
+        def libsDir = Paths.get(buildDir.absolutePath, "libs")
+        def outputFile = Paths.get(libsDir.toFile().absolutePath, "${jarFilename}.jar")
 
-        ant.zip(destfile: outputFile) {
+        ant.zip(destfile: outputGosuFile) {
             fileset(dir: srcDir)
+        }
+
+        ant.move file: outputFile, toDir: javaLibsDir
+
+        copy {
+            from outputGosuFile
+            into libsDir
+            rename { filename ->
+                filename.replace jarGosuFile, "${jarFilename}.jar"
+            }
         }
     }
 }
 
-compileGosu.finalizedBy(preparePackage)
 jar.finalizedBy(jarGosu)
