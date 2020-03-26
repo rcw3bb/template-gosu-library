@@ -15,6 +15,8 @@ A basic gradle project for gosu library development.
    ```
 
    > If it completes successfully your setup is good.
+   
+4. If you require a library that is not shared from any of the online repositories *(e.g. maven central)*. Place the **jar file** inside the **libs folder**.
 
 ## License
 

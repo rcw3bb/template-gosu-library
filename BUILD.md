@@ -3,7 +3,11 @@
 ## Pre-requisite
 
 * Java 8
+
 * [IntelliJ 2017.3](https://download.jetbrains.com/idea/ideaIC-2017.3.7.exe)
+
+* Update the property **JAVA_TOOLS_JAR** in your project **gradle.properties** file to have the correct path of your local **tools.jar**.
+
 * Create or update **<USER_HOME>\\.gradle\\gradle.properties** to have the following properties:
 
     ```properties
