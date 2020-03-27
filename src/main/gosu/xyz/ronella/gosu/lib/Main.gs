@@ -1,4 +1,4 @@
-package xyz.ronella.template.gosu.lib
+package xyz.ronella.gosu.lib
 
 uses org.slf4j.LoggerFactory
 

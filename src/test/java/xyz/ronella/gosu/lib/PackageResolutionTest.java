@@ -1,4 +1,4 @@
-package xyz.ronella.template.gosu.lib;
+package xyz.ronella.gosu.lib;
 
 /**
  * Only use this class for package resolution that is coming from gosu dependencies.

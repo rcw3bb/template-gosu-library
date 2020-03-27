@@ -1,4 +1,4 @@
-package xyz.ronella.template.gosu.lib
+package xyz.ronella.gosu.lib
 
 uses gw.test.TestClass
 
