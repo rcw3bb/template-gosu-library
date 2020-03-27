@@ -4,7 +4,7 @@ plugins {
     id 'org.gosu-lang.gosu' version '0.3.10'
 }
 
-group 'xyz.ronella.template'
+group 'xyz.ronella.gosu'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
