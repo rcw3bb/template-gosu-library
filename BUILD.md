@@ -12,28 +12,7 @@
     artifactoryUsername=<VALID_USERNAME>
     artifactoryPassword=<VALID_PASSWORD>
     ```
-
-    > If you don't have access to my **artifactory**, update all the **repositories section** in the **build.gradle** file **after cloning**, from:
-    >
-    > ```
-    > repositories {
-    >   maven {
-    >         url 'https://repo.ronella.xyz/artifactory/java-central'
-    >         credentials {
-    >             username "${artifactoryUsername}"
-    >             password "${artifactoryPassword}"
-    >         }
-    >   }
-    > }
-    > ```
-    >
-    > to
-    >
-    > ```
-    > repositories {
-    > 	mavenCentral()
-    > }
-    > ```
+    > Request for an **artifactory credentials** on **ron@ronella.xyz**. This is necessary because my repository has some updates on **gradle-gosu-plugin** which the official one doesn't have yet.
 
 ## Install Gosu Plugin
 
