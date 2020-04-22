@@ -2,11 +2,9 @@
 
 ## Pre-requisite
 
-* Java 8
+* Java 11
 
-* [IntelliJ 2017.3](https://download.jetbrains.com/idea/ideaIC-2017.3.7.exe)
-
-* Update the property **JAVA_TOOLS_JAR** in your project **gradle.properties** file to have the correct path of your local **tools.jar**.
+* [IntelliJ 2019.3.4](https://download.jetbrains.com/idea/ideaIC-2019.3.4.exe) *(This may require lower version of Java)*
 
 * Create or update **<USER_HOME>\\.gradle\\gradle.properties** to have the following properties:
 
@@ -39,15 +37,14 @@
 
 ## Install Gosu Plugin
 
-1. **Open** your **IntelliJ 2017.3**.
+1. **Open** your **IntelliJ 2019.3.4**.
 2. Select **File-> Settings** menu.
 3. Click **Plugins**.
-4. Click the **Browse Repositories** button.
+4. Click **Marketplace**.
 5. Type **OS Gosu**.
 6. Click the **Install** button.
-7. Click the **Restart IntellliJ IDEA** button.
-8. Click the **OK** button.
-9. Click the **Restart** button.
+7. Click the **Restart IDE** button.
+8. Click the **Restart** button.
 
 ## Testing
 
@@ -59,7 +56,6 @@ gradlew clean check
 
 > The preceding command must be run from the location where you've cloned the repository.
 >
-> If you are running the test in IntelliJ's **Platform Test Runner** ensure that the **Java 8's tools.jar** is part of the **1.8 SDK's** classpath.
 
 ## Building
 

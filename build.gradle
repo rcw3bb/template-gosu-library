@@ -1,13 +1,27 @@
 import java.nio.file.Paths
 
-plugins {
-    id 'org.gosu-lang.gosu' version '0.3.10'
+apply plugin: 'idea'
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://repo.ronella.xyz/artifactory/java-central'
+            credentials {
+                username "${artifactoryUsername}"
+                password "${artifactoryPassword}"
+            }
+        }
+    }
+    dependencies {
+        classpath "org.gosu-lang.gosu:gradle-gosu-plugin:0.3.15.1.0"
+    }
 }
 
-group 'xyz.ronella.gosu'
-version '1.0-SNAPSHOT'
+apply plugin: "org.gosu-lang.gosu"
 
-sourceCompatibility = 1.8
+group 'xyz.ronella.gosu'
+
+sourceCompatibility = 1.11
 
 repositories {
     maven {
@@ -20,13 +34,19 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.gosu-lang.gosu', name: 'gosu-core', version: '1.13.29'
+    compile group: 'org.gosu-lang.gosu', name: 'gosu-core', version: "${gosuVersion}"
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile fileTree(dir: './libs', include: ['*.jar'])
 
-    testCompile group: 'org.gosu-lang.gosu', name: 'gosu-test', version: '1.13.29'
+    testCompile group: 'org.gosu-lang.gosu', name: 'gosu-test', version: "${gosuVersion}"
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.9.1'
-    testRuntime files(Paths.get(JAVA_TOOLS_JAR))
+}
+
+idea {
+    module {
+        sourceDirs += file('src/main/gosu')
+        testSourceDirs += file('src/test/gosu')
+    }
 }
 
 task preparePackage(dependsOn: [jar]) {
