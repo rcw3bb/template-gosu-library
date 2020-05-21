@@ -18,7 +18,7 @@ A basic gradle project for gosu library development.
    >
    > Visit the **[build](BUILD.md) documentation** if you need the update the **repositories configuration** in **build.gradle file**.
    
-4. **Update** the **group** *(i.e. defaulted to xyz.ronella.gosu)* field in the **build.gradle file** that corresponds to your library.
+4. **Update** the **group** *(i.e. defaulted to xyz.ronella.gosu)* field in the **build.properties file** that corresponds to your library.
 
 5. **Replace all** the mentions of **template-gosu-library** to the name of **your library name**.
 
