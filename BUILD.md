@@ -47,31 +47,45 @@
 
 ## Testing
 
-Run the following command to test the application:
+1. In your **IntelliJ**, **open the directory** where cloned this repository.
 
-```
-gradlew clean check
-```
+2. **Open the project structure** by clicking: **File** -> **Project Structure** menu.
 
-> The preceding command must be run from the location where you've cloned the repository.
->
+3. On the **Project Settings/Project**, ensure that the **Project SDK** is set to **Java 11** and the **Project language level** to **11**.
+
+4. On the **Project Settings/Modules**, ensure that the **Language level** for **main** and **test** are **11**.
+
+5. **Click the OK button** at the bottom.
+
+6. **Find the gradle tab** that is usually on the **right side** and **expand it by clicking it**.
+
+7. Expand the **Tasks folder** -> **verification**.
+
+8. **Double click** the **check** task.
+
+   > All the test must pass.
 
 ## Building
 
-Run the following command to build the application:
+> Before doing this you must follows the procedure for testing.
+>
 
-```
-gradlew build
-```
+1. **Find the gradle tab** that is usually on the **right side** and **expand it by clicking it**.
 
-> The preceding command must be run from the location where you've cloned the repository.
+2. Expand the **Tasks folder** -> **build**.
+
+3. **Double click** the **build** task.
+
+   > The build must pass.
 
 ## Packaging
 
-Run the following command to package the application:
+> Before doing this you must follows the procedure for testing.
 
-```
-gradlew jar
-```
+1. **Find the gradle tab** that is usually on the **right side** and **expand it by clicking it**.
 
-> The preceding command must be run from the location where you've cloned the repository.
+2. Expand the **Tasks folder** -> **build**.
+
+3. **Double click** the **jar** task.
+
+   > The **jar file** will be generated in the **build/libs** directory. The jar file only contains the gosu files. If you want also the **gosu files with compiled classes** you can find it in **build/java-libs** directory.
