@@ -26,7 +26,15 @@ A basic gradle project for gosu library development.
 
 7. Start coding your library.
 
-   > If you require a library that is not shared from any of the online repositories *(e.g. maven central)*. Place the **jar file** inside the **libs folder**.
+
+## Dependencies
+For some reason that you cannot download a dependency from any of the online repositories *(e.g. maven central or gradle-plugins)*, download its jar file and choose the appropriate directory from the following to place it:
+
+| Directory      | Description                                    |
+| -------------- | ---------------------------------------------- |
+| ./libs/plugins | The plugins jar files.                         |
+| ./libs/main    | The jar files intended for the implementation. |
+| ./libs/test    | The jar files intended for the testing.        |
 
 ## License
 

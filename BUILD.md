@@ -4,7 +4,7 @@
 
 * Java 11
 
-* [IntelliJ 2019.3.4](https://download.jetbrains.com/idea/ideaIC-2019.3.4.exe) *(This may require lower version of Java)*
+* [IntelliJ 2019.3.4](https://download.jetbrains.com/idea/ideaIC-2019.3.4.exe) *(This may require Java 8)*
 
 * Create or update **<USER_HOME>\\.gradle\\gradle.properties** to have the following properties:
 
@@ -47,7 +47,7 @@
 
 ## Testing
 
-1. In your **IntelliJ**, **open the directory** where cloned this repository.
+1. In your **IntelliJ**, **open the directory** where you've **cloned repository**.
 
 2. **Open the project structure** by clicking: **File** -> **Project Structure** menu.
 
