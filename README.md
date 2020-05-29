@@ -36,6 +36,18 @@ For some reason that you cannot download a dependency from any of the online rep
 | ./libs/main    | The jar files intended for the implementation. |
 | ./libs/test    | The jar files intended for the testing.        |
 
+## GS CodeNarc Extension
+
+Part of this template is the usage of the **Gosu Extension for CodeNarc**. 
+
+Run CodeNarc using the following gradle command:
+
+```
+gradlew codenarcMainGosu
+```
+
+> More on https://github.com/rcw3bb/gs-codenarc-ext
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

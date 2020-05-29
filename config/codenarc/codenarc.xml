@@ -1,0 +1,37 @@
+<ruleset xmlns="http://codenarc.org/ruleset/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://codenarc.org/ruleset/1.0 http://codenarc.org/ruleset-schema.xsd"
+	xsi:noNamespaceSchemaLocation="http://codenarc.org/ruleset-schema.xsd">
+	
+	<ruleset-ref path='rulesets/gosu.xml'>
+  
+		<rule-config name='GosuClassSize'>
+			<property name='maxLines' value='1200' />
+		</rule-config>
+		
+		<rule-config name='GosuFunctionSize'>
+			<property name='maxLines' value='25' />
+		</rule-config>
+		
+		<rule-config name='GosuReturnCount'>
+			<property name='maxReturnCount' value='4' />
+		</rule-config>
+		
+		<rule-config name='GosuCyclomaticComplexity'>
+			<property name='maxMethodComplexity' value='7' />
+			<property name='priority' value='1' />
+		</rule-config>
+		
+		<rule-config name='GosuNestedIf'>
+			<property name='maxNestedDepth' value='2' />
+		</rule-config>
+		
+		<rule-config name='GosuFunctionParameterLength'>
+			<property name='maxParameters' value='4' />
+		</rule-config>
+		
+		<!--You can exclude rules from being executed as follows-->
+		<!--<exclude name='GosuFunctionSize' />-->
+	
+	</ruleset-ref>
+
+</ruleset>

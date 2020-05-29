@@ -1,8 +1,19 @@
 import java.nio.file.Paths
 
 buildscript {
+    repositories {
+        maven {
+            url 'https://repo.ronella.xyz/artifactory/java-central/'
+            credentials {
+                username "${artifactoryUsername}"
+                password "${artifactoryPassword}"
+            }
+        }
+    }
     dependencies {
         classpath fileTree(dir: './libs/plugins', include: ['*.jar'])
+        classpath group: 'org.codenarc', name: 'CodeNarc', version: '1.5'
+        classpath group: 'xyz.ronella.gosu', name: 'gs-codenarc-ext', version: '1.0.0'
     }
 }
 
@@ -71,3 +82,28 @@ task jarGosu(dependsOn: [preparePackage]) {
 }
 
 jar.finalizedBy(jarGosu)
+
+ant.taskdef(name: 'codenarcGosu', classname: 'org.codenarc.ant.CodeNarcTask') {
+    classpath {
+        buildscript.configurations.classpath.files.each { ___file ->
+            fileset(file: ___file)
+        }
+    }
+}
+
+task codenarcMainGosu {
+    doLast {
+        ant.codenarcGosu(ruleSetFiles: file("${projectDir}/config/codenarc/codenarc.xml").toURI().toString(),
+                maxPriority1Violations: maxPriority1Violations,
+                maxPriority2Violations: maxPriority2Violations,
+                maxPriority3Violations: maxPriority3Violations) {
+            report(type: 'html') {
+                option(name: "outputFile", value: "${buildDir}/reports/codenarc/main/codenarc.html")
+                option(name: "title", value: "Gosu Library Report")
+            }
+            sourceSets.main.allGosu.srcDirs.each { ___file ->
+                fileset(dir: ___file)
+            }
+        }
+    }
+}
