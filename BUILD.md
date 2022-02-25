@@ -4,7 +4,7 @@
 
 * Java 11
 
-* [IntelliJ 2019.3.4](https://download.jetbrains.com/idea/ideaIC-2019.3.4.exe) *(This may require Java 8)*
+* [IntelliJ 2021.1.3](https://download.jetbrains.com/idea/ideaIC-2021.1.3.exe)
 
 * Create or update **<USER_HOME>\\.gradle\\gradle.properties** to have the following properties:
 
@@ -36,7 +36,7 @@
 
 ## Install Gosu Plugin
 
-1. **Open** your **IntelliJ 2019.3.4**.
+1. **Open** your **IntelliJ 2021.1.3**.
 2. Select **File-> Settings** menu.
 3. Click **Plugins**.
 4. Click **Marketplace**.
