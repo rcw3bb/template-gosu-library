@@ -8,18 +8,55 @@ buildscript {
                 username "${artifactoryUsername}"
                 password "${artifactoryPassword}"
             }
+            mavenContent {
+                releasesOnly()
+            }
+        }
+        maven {
+            url 'https://repo.ronella.xyz/archiva/repository/snapshots/'
+            credentials {
+                username "${archivaUsername}"
+                password "${archivaPassword}"
+            }
+            mavenContent {
+                snapshotsOnly()
+            }
         }
     }
     dependencies {
         classpath fileTree(dir: './libs/plugins', include: ['*.jar'])
-        classpath group: 'org.codenarc', name: 'CodeNarc', version: '1.5'
-        classpath group: 'xyz.ronella.gosu', name: 'gs-codenarc-ext', version: '1.0.0'
     }
 }
-
-apply plugin: "org.gosu-lang.gosu"
+plugins {
+    id "org.gosu-lang.gosu" version "6.1.0"
+    id "xyz.ronella.gs-codenarc" version "2.0.0"
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.3"
+}
 
 sourceCompatibility = 1.11
+
+sourceSets {
+    main {
+        gosu {
+            srcDirs = ['src/main/gosu']
+            filter.include '**/*.gs', '**/*.gsx', '**/*.gst', '**/*.gsp'
+        }
+        java {
+            srcDirs = ['src/main/java'] + main.gosu.srcDirs
+            filter.exclude '**/*.gs', '**/*.gsx', '**/*.gst', '**/*.gsp'
+        }
+    }
+    test {
+        gosu {
+            srcDirs = ['src/test/gosu']
+            filter.include '**/*.gs', '**/*.gsx', '**/*.gst', '**/*.gsp'
+        }
+        java {
+            srcDirs = ['src/test/java'] + test.gosu.srcDirs
+            filter.exclude '**/*.gs', '**/*.gsx', '**/*.gst', '**/*.gsp'
+        }
+    }
+}
 
 repositories {
     maven {
@@ -27,6 +64,19 @@ repositories {
         credentials {
             username "${artifactoryUsername}"
             password "${artifactoryPassword}"
+        }
+        mavenContent {
+            releasesOnly()
+        }
+    }
+    maven {
+        url 'https://repo.ronella.xyz/archiva/repository/snapshots/'
+        credentials {
+            username "${archivaUsername}"
+            password "${archivaPassword}"
+        }
+        mavenContent {
+            snapshotsOnly()
         }
     }
 }
@@ -39,6 +89,23 @@ dependencies {
     testCompile group: 'org.gosu-lang.gosu', name: 'gosu-test', version: "${gosuVersion}"
     testCompile group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.9.1'
     testCompile fileTree(dir: './libs/test', include: ['*.jar'])
+}
+
+compileGosu { //Task type: org.gosulang.gradle.tasks.compile.GosuCompile
+    gosuOptions.checkedArithmetic = false
+    gosuOptions.failOnError = true
+    gosuOptions.maxErrs = 100
+    gosuOptions.maxWarns = Integer.MAX_VALUE
+    gosuOptions.verbose = false
+    gosuOptions.fork = true
+    gosuOptions.forkOptions.with {
+        memoryInitialSize = '' //'128m', '1g', etc.
+        memoryMaximumSize = ''
+        jvmArgs = [] //empty by default, but JAVA_OPTS environment var will be honored
+        //debugging examples:
+        //jvmArgs += ['-Xdebug', '-Xrunjdwp:transport=dt_shmem,address=gosuc,server=y,suspend=y'] //debug on windows
+        //jvmArgs += ['-Xdebug', '-Xrunjdwp:transport=dt_socket,address=5005,server=y,suspend=y'] //debug on linux/OS X
+    }
 }
 
 task preparePackage(dependsOn: [jar]) {
@@ -54,7 +121,6 @@ task preparePackage(dependsOn: [jar]) {
 }
 
 task jarGosu(dependsOn: [preparePackage]) {
-    group = 'Gosu Plugin'
     doLast {
         def srcDir = Paths.get(buildDir.absolutePath, "gosu")
         def jarFilename ="${project.name}-${version}"
@@ -83,27 +149,3 @@ task jarGosu(dependsOn: [preparePackage]) {
 
 jar.finalizedBy(jarGosu)
 
-ant.taskdef(name: 'codenarcGosu', classname: 'org.codenarc.ant.CodeNarcTask') {
-    classpath {
-        buildscript.configurations.classpath.files.each { ___file ->
-            fileset(file: ___file)
-        }
-    }
-}
-
-task codenarcMainGosu {
-    doLast {
-        ant.codenarcGosu(ruleSetFiles: file("${projectDir}/config/codenarc/codenarc.xml").toURI().toString(),
-                maxPriority1Violations: maxPriority1Violations,
-                maxPriority2Violations: maxPriority2Violations,
-                maxPriority3Violations: maxPriority3Violations) {
-            report(type: 'html') {
-                option(name: "outputFile", value: "${buildDir}/reports/codenarc/main/codenarc.html")
-                option(name: "title", value: "Gosu Library Report")
-            }
-            sourceSets.main.allGosu.srcDirs.each { ___file ->
-                fileset(dir: ___file)
-            }
-        }
-    }
-}

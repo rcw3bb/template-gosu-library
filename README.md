@@ -36,17 +36,17 @@ For some reason that you cannot download a dependency from any of the online rep
 | ./libs/main    | The jar files intended for the implementation. |
 | ./libs/test    | The jar files intended for the testing.        |
 
-## GS CodeNarc Extension
+## GS CodeNarc Gradle Plugin
 
-Part of this template is the usage of the **Gosu Extension for CodeNarc**. 
+Part of this template is the usage of the **GS CodeNarc Gradle Plugin**. 
 
 Run CodeNarc using the following gradle command:
 
 ```
-gradlew codenarcMainGosu
+gradlew gscodenarcMain
 ```
 
-> More on https://github.com/rcw3bb/gs-codenarc-ext
+> More on https://github.com/rcw3bb/gs-codenarc
 
 ## License
 
